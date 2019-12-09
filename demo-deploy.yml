@@ -1,0 +1,50 @@
+---
+kind: "Deployment"
+apiVersion: "apps/v1"
+metadata:
+  name: "front"
+  labels:
+    role: "front"
+spec:
+  replicas: 3
+  selector:
+    role: front
+  template:
+    metadata:
+      name: front
+    labels:
+      app: "front"
+    spec:
+      containers:
+      - name: "rouge"
+        image: "rouge:v1"
+      - name: "bleu"
+        image: "bleu:v1"
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+---
+kind: "Deployment"
+apiVersion: "apps/v1"
+metadata:
+  name: "back"
+  labels: 
+    role: "back"
+spec:
+  replicas: 3
+  selector:
+    role: back
+  template:
+    metadata:
+      name: back
+    labels:
+      app: "back"
+    spec:
+      containers:
+      - name: "rouge"
+        image: "rouge:v1"
+      - name: "bleu"
+        image: "bleu:v1"
+        ports:
+        - containerPort: 80
+        - containerPort: 443
