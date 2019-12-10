@@ -1,0 +1,69 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "front"
+  namespace: "default"
+  labels:
+    role: "front"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "front"
+  template:
+    metadata:
+      labels:
+        app: "front"
+    spec:
+      containers:
+      - name: "rouge"
+        image: "rouge:v1"
+      - name: "bleu"
+        image: "bleu:v1"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler
+metadata:
+  name: "nginx-1-hpa"
+  namespace: "default"
+#    role: front
+#  template:
+#   metadata:
+#      name: front
+#    labels:
+#      app: "front"
+#    spec:
+#      containers:
+#     - name: "rouge"
+#        image: "rouge:v1"
+#      - name: "bleu"
+#        image: "bleu:v1"
+#        ports:
+#        - containerPort: 80
+#        - containerPort: 443
+#---
+#kind: "Deployment"
+#apiVersion: "apps/v1"
+#metadata:
+#  name: "back"
+#  labels: 
+#    role: "back"
+#spec:
+#  replicas: 3
+#  selector:
+#   role: back
+#  template:
+#    metadata:
+#      name: back
+#    labels:
+#      app: "back"
+#    spec:
+#      containers:
+#      - name: "rouge"
+#        image: "rouge:v1"
+#      - name: "bleu"
+#        image: "bleu:v1"
+#        ports:
+#        - containerPort: 80
+#        - containerPort: 443

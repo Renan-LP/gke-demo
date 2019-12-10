@@ -1,0 +1,62 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "rouge"
+  namespace: "default"
+  labels:
+    app: "rouge"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "rouge"
+  template:
+    metadata:
+      labels:
+        app: "rouge"
+    spec:
+      containers:
+      - name: "nginx-rouge"
+        image: "nginx:rouge"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "bleu"
+  namespace: "default"
+  labels:
+    app: "bleu"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "bleu"
+  template:
+    metadata:
+      labels:
+        app: "bleu"
+    spec:
+      containers:
+      - name: "nginx-bleu"
+        image: "nginx:bleu"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "nginx-1-hpa"
+  namespace: "default"
+  labels:
+    app: "nginx-1"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "rouge"
+    apiVersion: "apps/v1"
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
