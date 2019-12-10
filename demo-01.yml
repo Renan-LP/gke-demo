@@ -19,8 +19,8 @@ spec:
       containers:
       - name: "rouge"
         image: "rouge:v1"
-      - name: "bleu"
-        image: "bleu:v1"
+#      - name: "bleu"
+#        image: "bleu:v1"
 ---
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler
