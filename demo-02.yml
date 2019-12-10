@@ -19,8 +19,9 @@ spec:
       containers:
       - name: "rouge"
         image: "eu.gcr.io/gke-discovery-03/rouge:v1"
-#      - name: "bleu"
-#        image: "eu.gcr.io/gke-discovery-03/bleu:v1"
+      - name: "bleu"
+        image: "eu.gcr.io/gke-discovery-03/bleu:v1"
+        ports:
 ---
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"

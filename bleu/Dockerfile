@@ -8,5 +8,5 @@ RUN apt update	&& \
 	mv rouge /var/www/html && \
 	mv index.html /var/www/html
 # COPY ./pages .
-EXPOSE 80
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
