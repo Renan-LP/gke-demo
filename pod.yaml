@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: back
+  labels:
+    app: web
+spec:
+  containers:
+    – name: rouge
+    image: "gke-discovery-03/rouge:v1"
+    ports:
+      – containerPort: 80

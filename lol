@@ -19,6 +19,8 @@ spec:
       containers:
       - name: "nginx"
         image: "nginx:latest"
+      - name: "rouge"
+        image: "eu.gcr.io/gke-discovery-03/rouge:v1"
 ---
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"

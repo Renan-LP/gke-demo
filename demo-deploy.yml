@@ -1,50 +1,43 @@
 ---
-kind: "Deployment"
 apiVersion: "apps/v1"
+kind: "Deployment"
 metadata:
   name: "front"
+  namespace: "default"
   labels:
-    role: "front"
+    app: "front"
 spec:
   replicas: 3
   selector:
-    role: front
-  template:
-    metadata:
-      name: front
-    labels:
+    matchLabels:
       app: "front"
-    spec:
-      containers:
-      - name: "rouge"
-        image: "rouge:v1"
-      - name: "bleu"
-        image: "bleu:v1"
-        ports:
-        - containerPort: 80
-        - containerPort: 443
----
-kind: "Deployment"
-apiVersion: "apps/v1"
-metadata:
-  name: "back"
-  labels: 
-    role: "back"
-spec:
-  replicas: 3
-  selector:
-    role: back
   template:
     metadata:
-      name: back
-    labels:
-      app: "back"
+      labels:
+        app: "front"
     spec:
       containers:
       - name: "rouge"
-        image: "rouge:v1"
+        image: "eu.gcr.io/gke-discovery-03/rouge:v1"
       - name: "bleu"
-        image: "bleu:v1"
-        ports:
-        - containerPort: 80
-        - containerPort: 443
+        image: "eu.gcr.io/gke-discovery-03/bleu:v1"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "front-1-hpa"
+  namespace: "default"
+  labels:
+    app: "front"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "front"
+    apiVersion: "apps/v1"
+  minReplicas: 3
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
