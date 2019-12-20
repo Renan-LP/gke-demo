@@ -1,0 +1,51 @@
+# ---
+
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "front"
+  namespace: "default"
+  labels:
+    app: "front"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "front"
+  template:
+    metadata:
+      labels:
+        app: "front"
+    spec:
+      containers:
+      - name: bleu
+        image: eu.gcr.io/gke-discovery-03/bleu:v1
+        ports:
+        - containerPort: 80
+
+#      - name: rouge
+#        image: eu.gcr.io/gke-discovery-03/rouge:v1
+#        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
+#        ports:
+#        - containerPort: 80
+
+# ---
+# apiVersion: "autoscaling/v2beta1"
+# kind: "HorizontalPodAutoscaler"
+# metadata:
+#  name: "front-1-hpa"
+#  namespace: "default"
+#  labels:
+#    app: "front"
+# spec:
+#  scaleTargetRef:
+#    kind: "Deployment"
+#    name: "front"
+#    apiVersion: "apps/v1"
+#  minReplicas: 3
+#  maxReplicas: 5
+#  metrics:
+#  - type: "Resource"
+#    resource:
+#      name: "cpu"
+#      targetAverageUtilization: 80
