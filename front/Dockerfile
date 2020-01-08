@@ -5,7 +5,7 @@ COPY ./pages .
 RUN apt update	&& \
 	apt install -yf \
 	nginx && \
-	mv bleu /var/www/html && \
+#	mv bleu /var/www/html && \
 	mv index.html /var/www/html
 # COPY ./pages .
 EXPOSE 80

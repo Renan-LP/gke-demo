@@ -1,0 +1,22 @@
+kind: Deployment
+apiVersion: v1.1
+metadata:
+  name: frontend
+spec:
+  replicas: 4
+  selector:
+    role: web
+  template:
+    metadata:
+      name: web
+      labels:
+        role: web
+    spec:
+      containers:
+      - name: my-app
+        image: my-app
+      - name: nginx-ssl
+        image: nginx
+        ports:
+        - containerPort: 80
+        - containerPort: 443

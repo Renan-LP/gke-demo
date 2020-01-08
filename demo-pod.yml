@@ -1,16 +1,45 @@
+---
 apiVersion: v1
 kind: Pod
 metadata:
     name: front
+    labels: 
+      env: front
+      app: rouge
+spec:
+  containers:
+  - name: rouge
+    image: eu.gcr.io/gke-discovery-03/rouge:v1
+    ports:
+      - containerPort: 80
+metadata:
+    name: front
+    labels: 
+      env: front
+      app: bleu
 spec:
   containers:
   - name: bleu
     image: eu.gcr.io/gke-discovery-03/bleu:v1
-    ports:
-      - containerPort: 80
-
-  - name: rouge
-    image: eu.gcr.io/gke-discovery-03/rouge:v1
     command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
     ports:
       - containerPort: 80
+
+#---
+#kind: Pod
+#metadata:
+#    name: back
+#spec:
+#  containers:
+#  - name: rouge
+#    label: rouge
+#    image: eu.gcr.io/gke-discovery-03/rouge:v1
+#    ports:
+#      - containerPort: 80  
+#
+#  - name: bleu
+#    label: bleu
+#    image: eu.gcr.io/gke-discovery-03/bleu:v1
+#    command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
+#    ports:
+#      - containerPort: 80

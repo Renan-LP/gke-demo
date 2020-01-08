@@ -1,0 +1,13 @@
+apiVersion: "apps/v1"
+kind: "pod"
+metadata:
+  name: "site-web"
+spec:
+  containers:
+  - name: site-bleu-v1
+    image: eu.gcr.io/gke-discovery-03/bleu:v1
+  - name: nginx-ssl
+    image: nginx
+    ports:
+    - containerPort: 80
+    - containerPort: 443

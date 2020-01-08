@@ -1,0 +1,26 @@
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: back-rep
+#  labels:
+#    run: back-rep
+#spec:
+#  ports:
+#  - port: 80
+#    protocol: TCP
+#  selector:
+#    run: back-rep
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: lb-interne
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: web
+  type: LoadBalancer
