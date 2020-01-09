@@ -1,0 +1,8 @@
+FROM ubuntu:16.04
+RUN mkdir /etc/site
+WORKDIR /etc/site
+COPY ./pages .
+RUN apt update &&\
+  apt install -yf stunnel &&\
+CMD ["nginx", "-g", "daemon off;"]
+
