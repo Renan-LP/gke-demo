@@ -4,8 +4,9 @@ WORKDIR /etc/site
 COPY ./pages .
 RUN apt update	&& \
 	apt install -yf \
-	stunnel && \
-	mv /etc/site /etc/stunnel
+	nginx && \
+#	mv bleu /var/www/html && \
+	mv index.html /var/www/html
 # COPY ./pages .
-# EXPOSE 80
-CMD ["echo hello"]
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

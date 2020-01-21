@@ -8,4 +8,4 @@ RUN apt update	&& \
 	mv /etc/site /etc/stunnel
 # COPY ./pages .
 # EXPOSE 80
-CMD ["echo hello"]
+CMD ["nginx", "-g", "daemon off;"]
