@@ -23,4 +23,4 @@ spec:
     protocol: TCP
   selector:
     app: web
-  type: LoadBalancer
+  type: ClusterIP

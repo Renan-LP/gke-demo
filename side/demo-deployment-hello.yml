@@ -1,7 +1,7 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "site-accueil"
+  name: "site-hello"
   namespace: "default"
   labels:
     env: "front"
