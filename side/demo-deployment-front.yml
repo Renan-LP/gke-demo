@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: site-front-v1
-        image: eu.gcr.io/gke-discovery-03/front:v1
+        image: eu.gcr.io/gke-discovery-03/stop:v4
         ports:
         - containerPort: 80
 
