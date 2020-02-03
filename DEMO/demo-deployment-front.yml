@@ -1,0 +1,58 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "site-front"
+  namespace: "default"
+  labels:
+    env: "front"
+    app: "web"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      env: "front"
+      app: "web"
+  template:
+    metadata:
+      labels:
+        env: "front"
+        app: "web"
+    spec:
+      containers:
+      - name: site-front-v1
+        image: eu.gcr.io/gke-discovery-03/stop:v4
+        ports:
+        - containerPort: 80
+
+
+#        livenessProbe:
+#          initialDelaySeconds: 10
+#          timeoutSeconds: 1
+#          httpget:
+#            path: /
+#            port: 80
+
+
+
+
+
+
+#apiVersion: "apps/v1"
+#kind: "Deployment"
+#metadata:
+#  namespace: site-bleu
+#spec:
+#  replicas: 2
+#  selector:
+#    role: "bleu"
+#  template:
+#    metadata:
+#      name: "bleu"
+#      labels:
+#        role: "bleu"
+#    spec:
+#      containers:
+#      - name: "site-bleu-v1"
+#        image: "eu.gcr.io/gke-discovery-03/bleu:v1"
+#        ports:
+#        - containerPort: 80
