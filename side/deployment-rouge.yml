@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: site-rouge
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+        track: canary
+        # Use ver 1.0.0 so it matches version on service selector
+        version: 1.0.0
+    spec:
+      containers:
+        - name: rouge
+          image: eu.gcr.io/gke-discovery-03/rouge:v1
+          ports:
+            - name: http
+              containerPort: 80
+            - name: health
+              containerPort: 81

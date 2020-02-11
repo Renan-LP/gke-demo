@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: site-accueil
-        image: eu.gcr.io/gke-discovery-03/hello:v1
+        image: eu.gcr.io/gke-discovery-03/hello:v2
         ports:
         - containerPort: 80
 
