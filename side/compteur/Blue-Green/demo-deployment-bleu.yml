@@ -1,37 +1,79 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "site-bleu"
+  name: site-bleu
   namespace: "default"
   labels:
-    env: "back"
-    app: "web"
+    app: front
+    version: 1.0.0
 spec:
   replicas: 3
   selector:
     matchLabels:
-      env: "back"
-      app: "web"
+      app: front
+      version: 1.0.0
   template:
     metadata:
       labels:
-        env: "back"
-        app: "web"
+        app: front
+        version: 1.0.0
     spec:
       containers:
-      - name: site-bleu
+#      - name: bleu
+#        image: eu.gcr.io/gke-discovery-03/bleu:v1
+#        ports:
+#        - containerPort: 80
+
+      - name: bleu
         image: eu.gcr.io/gke-discovery-03/bleu:v1
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            cpu: 0.2
-            memory: "10Mi"
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 81
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 15
-          timeoutSeconds: 5
+
+#apiVersion: "apps/v1"
+#kind: "Deployment"
+#metadata:
+#  name: "back-rouge"
+#  namespace: "default"
+#  labels:
+#    app: "back-rouge"
+#spec:
+#  replicas: 3
+#  selector:
+#    matchLabels:
+#      app: "back"
+#  template:
+#    metadata:
+#      labels:
+#        app: "back"
+#    spec:
+#      containers:
+#      - name: bleu
+#        image: eu.gcr.io/gke-discovery-03/bleu:v1
+#        ports:
+#        - containerPort: 80
+
+#     - name: rouge
+#        image: eu.gcr.io/gke-discovery-03/rouge:v1
+#        ports:
+#        - containerPort: 80
+
+
+# apiVersion: "autoscaling/v2beta1"
+# kind: "HorizontalPodAutoscaler"
+# metadata:
+#  name: "front-1-hpa"
+#  namespace: "default"
+#  labels:
+#    app: "front"
+# spec:
+#  scaleTargetRef:
+#    kind: "Deployment"
+#    name: "front"
+#    apiVersion: "apps/v1"
+#  minReplicas: 3
+#  maxReplicas: 5
+#  metrics:
+#  - type: "Resource"
+#    resource:
+#      name: "cpu"
+#      targetAverageUtilization: 80
