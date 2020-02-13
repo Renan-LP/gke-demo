@@ -4,9 +4,9 @@ WORKDIR /etc/site
 COPY ./pages .
 RUN apt update	&& \
 	apt install -yf \
-	nginx && \
+	apache2 && \
 	mv rouge /var/www/html && \
 	mv index.html /var/www/html
 # COPY ./pages .
-# EXPOSE 80
+EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
