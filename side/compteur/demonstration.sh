@@ -2,6 +2,8 @@
 
 # SCRIPT DE DEMONSTRATION GKE
 
+j=0
+
 echo "RESET DE L'ENVIRONNEMENT DE DEMO"
 kubectl delete deployments site-rouge
 kubectl delete deployments site-bleu
@@ -37,57 +39,12 @@ select i in CANARY-AUTO CANARY ROLLING-AUTO ROLLING BLUE-GREEN-AUTO BLUE-GREEN; 
 		sleep 1
 		echo "deployments : "
 		kubectl get deployments
-		curl http://$SERVICE_IP
-		sleep 1
-		curl http://$SERVICE_IP
-		sleep 1
-		curl http://$SERVICE_IP
-		sleep 1
-		curl http://$SERVICE_IP
-		sleep 1
-		curl http://$SERVICE_IP
-		sleep 1
-		curl http://$SERVICE_IP
-		sleep 1
-		curl http://$SERVICE_IP
-               	sleep 1
-                curl http://$SERVICE_IP
-                sleep 1
-               	curl http://$SERVICE_IP
-                sleep 1
-                curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-                sleep 1
-                curl http://$SERVICE_IP
-                sleep 1
-               	curl http://$SERVICE_IP
-                sleep 1
-               	curl http://$SERVICE_IP
-                sleep 1
-                curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-		sleep 1
-		curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-               	sleep 1
-               	curl http://$SERVICE_IP
-               	sleep 1
-                curl http://$SERVICE_IP
+		while [ $j -le 19 ]
+		do
+        		curl http://$SERVICE_IP
+                	sleep 1
+			((j++))
+		done
 		echo "Suppression des deployments ..."
 		kubectl delete deployments site-rouge
 		kubectl delete deployments site-bleu

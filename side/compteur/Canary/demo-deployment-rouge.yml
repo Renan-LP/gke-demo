@@ -26,18 +26,14 @@ spec:
         image: eu.gcr.io/gke-discovery-03/rouge:v1
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            cpu: 0.2
-            memory: "10Mi"
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 81
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 15
-          timeoutSeconds: 5
+#        livenessProbe:
+#          httpGet:
+#            path: /healthz
+#            port: 81
+#            scheme: HTTP
+#          initialDelaySeconds: 5
+#          periodSeconds: 15
+#          timeoutSeconds: 5
 
 #    spec:
 #      containers:
